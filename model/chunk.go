@@ -16,7 +16,7 @@ type Chunk struct {
 func (c *Chunk) Download(target string) error {
 	// 发起GET请求
 	resp, err := http.Get(c.FilePath)
-	if err != nil {
+	if err != nil || resp.StatusCode != 200 {
 		return err
 	}
 	defer resp.Body.Close()
