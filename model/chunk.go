@@ -7,8 +7,8 @@ import (
 )
 
 type Chunk struct {
-	Duration float32 // 时长（秒）
-	FileSize uint32  // 文件大小
+	Duration string // 时长（秒）
+	FileSize string  // 文件大小
 	FilePath string  // 文件路径
 	FileName string  // 文件名称
 }

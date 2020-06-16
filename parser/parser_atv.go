@@ -25,8 +25,8 @@ import (
 
 type Video struct {
 	File       string  // 文件路径
-	Duration   float32 // 时长（秒）
-	BytesTotal uint32  // 文件大小
+	Duration   string // 时长（秒）
+	BytesTotal string  // 文件大小
 }
 
 type Atv struct {
