@@ -20,7 +20,7 @@ const DIR string = "C:/tmp/00/" // 保存路径
 const ThreadNum int = 5         // 线程数
 //const MaxFileSize int = 100 * 1024 * 1024 // 文件最大内存（100MB）
 const MaxFileSize int = 3 * 1024 * 1024 * 1024                                  // 文件最大内存（3GB）
-const FFMPEG string = "C:/environment/ffmpeg-4.1.1-win64-static/bin/ffmpeg.exe" // FFMPEG命令地址
+const FFMPEG string = "C:/environment/ffmpeg-4.2.3-win64-static/bin/ffmpeg.exe" // FFMPEG命令地址
 
 type Way struct {
 	Id     string
@@ -99,6 +99,11 @@ func prepare() (pr parser.Parser, data string) {
 	for {
 		fmt.Printf("数据：")
 		if _, err := fmt.Scanln(&data); err == nil {
+			if strings.HasPrefix(data, "./") {
+				if content, err := ioutil.ReadFile(data); err == nil {
+					data = string(content)
+				}
+			}
 			break
 		}
 	}
