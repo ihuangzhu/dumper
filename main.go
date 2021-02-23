@@ -20,7 +20,7 @@ const DIR string = "C:/tmp/00/" // 保存路径
 const ThreadNum int = 5         // 线程数
 //const MaxFileSize int = 100 * 1024 * 1024 // 文件最大内存（100MB）
 const MaxFileSize int = 3 * 1024 * 1024 * 1024                                  // 文件最大内存（3GB）
-const FFMPEG string = "C:/environment/ffmpeg-4.2.3-win64-static/bin/ffmpeg.exe" // FFMPEG命令地址
+const FFMPEG string = "C:/Env/ffmpeg-4.2.3-win64-static/bin/ffmpeg.exe" // FFMPEG命令地址
 
 type Way struct {
 	Id     string
@@ -30,6 +30,8 @@ type Way struct {
 
 var ways = map[string]Way{
 	"1": {Id: "1", Name: "ATV", Parser: new(parser.Atv)},
+	"2": {Id: "2", Name: "VOD", Parser: new(parser.Vod)},
+	"3": {Id: "3", Name: "MHPPTV", Parser: new(parser.MHPPTV)},
 }
 
 func init() {
@@ -81,8 +83,19 @@ func main() {
 
 func prepare() (pr parser.Parser, data string) {
 	fmt.Println("选择类型：")
-	for _, value := range ways {
-		fmt.Println(value.Id + "）" + value.Name)
+
+	// 键值排序
+	keys := make([]int, len(ways))
+	i := 0
+	for key := range ways {
+		keys[i], _ = strconv.Atoi(key)
+		i++
+	}
+	sort.Ints(keys)
+
+	// 输出
+	for _, key := range keys {
+		fmt.Println(ways[strconv.Itoa(key)].Id + "）" + ways[strconv.Itoa(key)].Name)
 	}
 
 	var way string

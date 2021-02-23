@@ -44,7 +44,7 @@ func (pv *Atv) Parse(params string) (chunks []model.Chunk, ok bool) {
 					var fileName string
 					if parseUrl, err := url.Parse(valueL3.File); err == nil {
 						if pathArr := strings.Split(strings.Trim(parseUrl.Path, "/"), "/"); len(pathArr) > 1 {
-							var suffix string = ""
+							var suffix = ""
 							if i := strings.LastIndex(parseUrl.Path, "."); i != -1 {
 								suffix = parseUrl.Path[i:]
 							}
